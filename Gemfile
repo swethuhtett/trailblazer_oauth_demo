@@ -19,6 +19,22 @@ gem "jbuilder"
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
+# Trailblazer core
+gem 'trailblazer-rails'
+gem 'reform-rails'
+
+# OAuth 2.0 support
+gem 'omniauth'
+gem 'omniauth-oauth2'
+
+# Example: GitHub strategy
+gem 'omniauth-github'
+
+# Use dotenv to manage client secrets
+gem 'dotenv-rails'
+
+gem 'faraday'
+
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 

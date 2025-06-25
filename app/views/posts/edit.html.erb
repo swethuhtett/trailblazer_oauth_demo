@@ -1,0 +1,19 @@
+<h1>Edit Post</h1>
+
+<%= form_with model: @form, scope: :post, url: post_path(@form.model), method: :patch, local: true do |form| %>
+  <p>
+    <%= form.label :title %><br>
+    <%= form.text_field :title %>
+    <%= @form.errors[:title].join(", ") if @form.errors[:title].any? %>
+  </p>
+
+  <p>
+    <%= form.label :content %><br>
+    <%= form.text_area :content %>
+    <%= @form.errors[:content].join(", ") if @form.errors[:content].any? %>
+  </p>
+
+  <p><%= form.submit "Update Post" %></p>
+<% end %>
+
+<%= link_to "Back", posts_path %>

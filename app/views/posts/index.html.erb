@@ -1,0 +1,15 @@
+<h1>All Posts</h1>
+
+<%= link_to "New Post", new_post_path %>
+
+<ul>
+  <% @posts.each do |post| %>
+    <li>
+      <strong><%= link_to post.title, post_path(post) %></strong>
+      <small>
+        <%= link_to "Edit", edit_post_path(post) %> |
+        <%= link_to "Delete", post_path(post), method: :delete, data: { turbo: false, confirm: "Are you sure?" } %>
+      </small>
+    </li>
+  <% end %>
+</ul>
