@@ -16,7 +16,7 @@ namespace :monthly do
 
   desc "Task 4: Create a new post"
   task four: :environment do
-    post = Post.create(title: "Daily scheduled Post", content: "Automatically created at #{Time.now}")
+    post = Post.create(title: "Daily scheduled Post: #{Time.now.hour}", content: "Automatically created at #{Time.now}")
     if post.persisted?
       puts "Created Post ##{post.id}: #{post.title}"
     else
