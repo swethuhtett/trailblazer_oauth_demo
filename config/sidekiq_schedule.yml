@@ -1,0 +1,4 @@
+daily_report_worker:
+  cron: "00 17 * * 1-5"
+  class: "DailyWorker"
+  queue: default

@@ -18,9 +18,9 @@ namespace :monthly do
   task four: :environment do
     post = Post.create(title: "Daily scheduled Post", content: "Automatically created at #{Time.now}")
     if post.persisted?
-      puts "✅ Created Post ##{post.id}: #{post.title}"
+      puts "Created Post ##{post.id}: #{post.title}"
     else
-      puts "❌ Failed to create post: #{post.errors.full_messages.join(", ")}"
+      puts "Failed to create post: #{post.errors.full_messages.join(", ")}"
     end
   end
 
