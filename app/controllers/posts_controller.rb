@@ -3,6 +3,8 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all
+    @access_token = session[:access_token]
+    @token_expired = session[:token_expired]
   end
 
   def show

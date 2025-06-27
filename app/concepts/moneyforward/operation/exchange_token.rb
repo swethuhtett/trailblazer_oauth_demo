@@ -19,8 +19,8 @@ module Moneyforward::Operation
         req.headers['Content-Type'] = 'application/x-www-form-urlencoded'
 
         req.body = {
-          grant_type:   'authorization_code',
-          code:         code
+          grant_type: 'authorization_code',
+          code: code
         }
       end
 
@@ -29,7 +29,7 @@ module Moneyforward::Operation
         ctx[:access_token]  = json['access_token']
         ctx[:refresh_token] = json['refresh_token']
         ctx[:expires_in]    = json['expires_in']
-        puts "access_token: #{ctx[:access_token]}"
+
         true
       else
         ctx[:error] = response.body

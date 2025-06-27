@@ -1,5 +1,8 @@
 <h1>All Posts</h1>
 
+<%= link_to "Connect MoneyForward", oauth_moneyforward_start_path, class: "btn btn-primary" %>
+<br/>
+
 <%= link_to "New Post", new_post_path %>
 
 <ul>
@@ -13,3 +16,100 @@
     </li>
   <% end %>
 </ul>
+
+<% if @access_token.present? %>
+  <% masked_token = '•' * @access_token.length %>
+
+  <div class="token-container">
+    <span class="token-label">Access Token:</span>
+    <span id="access-token"><%= masked_token %></span>
+    <span id="real-token" style="display: none;"><%= @access_token %></span>
+
+    <div class="token-actions">
+      <button id="toggle-token" onclick="toggleToken()">Show</button>
+      <button onclick="copyToken()">Copy</button>
+      <span id="copy-feedback" style="display: none; color: green;">Copied!</span>
+    </div>
+  </div>
+
+  <script>
+    function toggleToken() {
+      const masked = document.getElementById('access-token');
+      const real = document.getElementById('real-token');
+      const button = document.getElementById('toggle-token');
+
+      const isHidden = real.style.display === 'none';
+
+      real.style.display = isHidden ? 'inline' : 'none';
+      masked.style.display = isHidden ? 'none' : 'inline';
+      button.innerText = isHidden ? 'Hide' : 'Show';
+    }
+
+    function copyToken() {
+      const token = document.getElementById('real-token').innerText;
+
+      navigator.clipboard.writeText(token).then(function() {
+        const feedback = document.getElementById('copy-feedback');
+        feedback.style.display = 'inline';
+        setTimeout(() => { feedback.style.display = 'none'; }, 2000);
+      }, function(err) {
+        alert('Failed to copy token: ' + err);
+      });
+    }
+  </script>
+<% end %>
+
+<% if @token_expired %>
+  <div class="expired-msg">
+    Token Expired. Please <%= link_to "refresh token", oauth_refresh_token_path, style: "text-decoration: underline;" %>.
+  </div>
+<% end %>
+
+<style>
+  .token-container {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    display: inline-block;
+  }
+
+  .token-label {
+    font-weight: bold;
+    margin-right: 8px;
+  }
+
+  #access-token,
+  #real-token {
+    font-family: monospace;
+    background-color: #eee;
+    padding: 6px 10px;
+    border-radius: 4px;
+  }
+
+  .token-actions {
+    margin-top: 10px;
+  }
+
+  .token-actions button {
+    margin-right: 8px;
+    padding: 5px 12px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  #copy-feedback {
+    font-size: 14px;
+  }
+
+  .expired-msg {
+    color: #b02a37;
+    background-color: #f8d7da;
+    border: 1px solid #f5c2c7;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 6px;
+    font-weight: bold;
+  }
+</style>

@@ -37,7 +37,7 @@ gem 'faraday'
 
 gem 'sidekiq'
 
-gem 'pry'
+gem 'byebug'
 
 gem "sidekiq-cron"
 

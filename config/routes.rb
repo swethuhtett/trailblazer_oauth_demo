@@ -10,8 +10,10 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
   get '/auth/:provider/callback', to: 'sessions#create'
 
-  get '/oauth/moneyforward/start',    to: 'oauth#start'
+  get '/oauth/moneyforward/start', to: 'oauth#start', as: 'oauth_moneyforward_start'
+  get '/oauth/moneyforward/refresh', to: 'oauth#refresh', as: 'oauth_refresh_token'
   get '/oauth/moneyforward/callback', to: 'oauth#callback'
+
 
   resources :posts
     root 'posts#index'
